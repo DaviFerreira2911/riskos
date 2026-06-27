@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  fraud-detector:
+    build:
+      context: ../services/fraud-detector
+    ports:
+      - "8001:8001"
+    command: python -m uvicorn main:app --host 0.0.0.0 --port 8001
+
+  churn-analytics:
+    build:
+      context: ../services/churn-analytics
+    ports:
+      - "8002:8002"
+    command: python -m uvicorn main:app --host 0.0.0.0 --port 8002
+
+  decision-engine:
+    build:
+      context: ../services/decision-engine
+    ports:
+      - "8003:8003"
+    command: python -m uvicorn main:app --host 0.0.0.0 --port 8003
+    depends_on:
+      - fraud-detector
+      - churn-analytics
