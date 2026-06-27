@@ -142,10 +142,9 @@ peça que normalmente falta em projetos de portfólio.
 
 ## 7. Como rodar localmente
 
-```bash
-git clone <este-repositório>
-cd riskos
-docker-compose up
-```
+git clone https://github.com/DaviFerreira2911/riskos.git
+cd riskos/services/decision-engine
+pip install fastapi uvicorn pydantic --only-binary :all:
+python -m uvicorn main:app --reload --port 8003
 
-O dashboard ficará disponível em `http://localhost:3000`.
+Acesse http://127.0.0.1:8003/docs para explorar a API interativa.
